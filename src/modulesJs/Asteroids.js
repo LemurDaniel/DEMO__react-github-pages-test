@@ -35,9 +35,9 @@ class Asteroid extends Particle {
 
         const direction = Vector.sub(ship, pos);
         const obfuscateAngle = direction.heading() - (Math.random() * Math.PI/8  - Math.PI/16)
-        const velocity = Vector.fromAngle(obfuscateAngle, Math.random()*3 + 1)
 
-        const radius = Math.random()*75 + 8;
+        const velocity = Vector.fromAngle(obfuscateAngle, Math.random()*(canvas.width*0.0025) )
+        const radius = Math.random()* (Math.min(canvas.width*0.035, 55)) + 8;
 
         const verts = [];
         for( let i=Math.PI*2; i>=0; i -= Math.PI/8 ) {
@@ -88,14 +88,15 @@ class Asteroid extends Particle {
         this.setRotation();
         ast.setRotation();
 
-        this.velocity.setMag( this.velocity.mag() * -0 );
-        ast.velocity.setMag( ast.velocity.mag() * -0 );
+        this.velocity.setMag( this.velocity.mag() * -0.01 );
+        ast.velocity.setMag( ast.velocity.mag() * -0.01 );
 
         ast.applyForce(vel, this.mass);
         this.applyForce(vel2, ast.mass);
 
+
         let dist;
-        let maximum = 50;
+        let maximum =  75;
         const temp = this.velocity.copy().setMag(0.1);
         const temp2 = ast.velocity.copy().setMag(0.1);
         do {
@@ -104,7 +105,21 @@ class Asteroid extends Particle {
             this.add(temp)
             ast.add(temp2);
         } while(--maximum && dist <= this.radius + ast.radius);
+        
 
+        if(this.dist(ast) <= this.radius + ast.radius) {
+            const temp = Vector.add(this.velocity, ast.velocity);
+            this.velocity = temp.copy().setMag( Math.abs(this.velocity.mag()) *1);
+            ast.velocity = temp.copy().setMag( Math.abs(ast.velocity.mag()) *-1)
+
+            maximum = 75;
+            do {
+                /// console.log(dist)
+                dist = this.dist(ast);
+                this.add(this.velocity)
+                ast.add(ast.velocity);
+            } while(--maximum && dist <= this.radius + ast.radius);
+        }
     }
 
 }

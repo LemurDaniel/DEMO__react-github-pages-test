@@ -35,11 +35,7 @@ function App() {
         <button className="py-1 hover:underline text-brand2-100  font-bold" > Space Game </button>
       </nav>
 
-      <div className=" ">
-
-        <Spacegame width={width} height={height} />
-
-      </div>
+      <Spacegame width={window.screen.width} height={window.window.innerHeight-70} />
 
       <Footer />
 

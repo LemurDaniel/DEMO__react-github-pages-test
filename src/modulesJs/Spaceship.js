@@ -51,17 +51,30 @@ class Ship extends Particle {
 
     document.addEventListener('keyup', e => {
       if (e.code === 'Space') {
-        this.cannon.push(new Bullet(
-          this.copy(), Vector.fromAngle(this.angle, 20)
-        ))
+        this.shoot();
       }
       if (e.code === 'KeyW') {
-        this.velocity = Vector.fromAngle(
-          this.angle, this.cursor.mag() * 0.035)
+        this.thrust();
       }
     })
 
 
+  }
+
+  thrust(gradual) {
+    if(gradual) {
+      this.velocity.add(Vector.fromAngle(
+        this.angle, this.cursor.mag() * 0.00055))
+    } else {
+      this.velocity = Vector.fromAngle(
+        this.angle, this.cursor.mag() * 0.035)
+    }
+  }
+
+  shoot() {
+    this.cannon.push(new Bullet(
+      this.copy(), Vector.fromAngle(this.angle, 20)
+    ))
   }
 
   setCursor(pos) {
@@ -112,6 +125,8 @@ class Ship extends Particle {
   }
 
 }
+
+
 
 
 export default Ship;
