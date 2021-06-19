@@ -18,13 +18,12 @@ function App() {
     const w = window.screen.width;
 
     if(w > 720) {
-      setWidth(w * 0.25)
-      setHeight(h * 0.35)
+      setWidth(w * 0.75)
+      setHeight(h * 0.55)
     } else {
       setWidth(w * 0.85)
-      setHeight(h * 0.60)
+      setHeight(h * 0.55)
     }
-    console.log('ttt')
     console.log(width)
     console.log(height)
   }, [])

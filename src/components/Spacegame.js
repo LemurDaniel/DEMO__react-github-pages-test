@@ -63,6 +63,9 @@ const Spacegame = ({ width, height }) => {
 
     const [score, setScore] = useState(0);
     useEffect(() => {
+        setAstTarget( Math.max(4, Math.ceil(score / 75)) );
+    }, [score])
+    useEffect(() => {
         if (!ship || !asteroids || !gameRunning) return;
         let localScore = score;
 
@@ -107,7 +110,6 @@ const Spacegame = ({ width, height }) => {
                     asteroids.calculateCollsision(bullet, result => {
                         localScore += result;
                         setScore(localScore);
-                        setAstTarget( Math.ceil(Math.max(4, score / 75)) );
                         setAstAmount(asteroids.count());
                     })
                 );
