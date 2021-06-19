@@ -24,8 +24,6 @@ function App() {
       setWidth(w * 0.85)
       setHeight(h * 0.55)
     }
-    console.log(width)
-    console.log(height)
   }, [])
 
   return (

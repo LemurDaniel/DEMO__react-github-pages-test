@@ -49,7 +49,7 @@ const Spacegame = ({ width, height }) => {
 
 
     const [astAmount, setAstAmount] = useState(0);
-    const [astTarget, setAstTarget] = useState(4);
+    const [astTarget, setAstTarget] = useState(12);
     useEffect(() => {
         const add = () => {
             if(asteroids.count() >= astTarget) return;
@@ -63,7 +63,7 @@ const Spacegame = ({ width, height }) => {
 
     const [score, setScore] = useState(0);
     useEffect(() => {
-        setAstTarget( Math.max(4, Math.ceil(score / 75)) );
+        setAstTarget( Math.max(12, Math.ceil(score / 75)) );
     }, [score])
     useEffect(() => {
         if (!ship || !asteroids || !gameRunning) return;
@@ -106,13 +106,11 @@ const Spacegame = ({ width, height }) => {
             });
 
             cannon.particles.forEach(bullet => {
-                asteroids.particles.forEach(prt =>
-                    asteroids.calculateCollsision(bullet, result => {
-                        localScore += result;
-                        setScore(localScore);
-                        setAstAmount(asteroids.count());
-                    })
-                );
+                asteroids.calculateCollsision(bullet, result => {
+                    localScore += result;
+                    setScore(localScore);
+                    setAstAmount(asteroids.count());
+                })
             })
 
         };
