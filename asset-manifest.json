@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/LemurDaniel/DEMO__react-github-pages-test/static/css/main.8ceeeda2.chunk.css",
-    "main.js": "/LemurDaniel/DEMO__react-github-pages-test/static/js/main.a331bd74.chunk.js",
-    "main.js.map": "/LemurDaniel/DEMO__react-github-pages-test/static/js/main.a331bd74.chunk.js.map",
-    "runtime-main.js": "/LemurDaniel/DEMO__react-github-pages-test/static/js/runtime-main.449a9806.js",
-    "runtime-main.js.map": "/LemurDaniel/DEMO__react-github-pages-test/static/js/runtime-main.449a9806.js.map",
-    "static/js/2.79dd96a1.chunk.js": "/LemurDaniel/DEMO__react-github-pages-test/static/js/2.79dd96a1.chunk.js",
-    "static/js/2.79dd96a1.chunk.js.map": "/LemurDaniel/DEMO__react-github-pages-test/static/js/2.79dd96a1.chunk.js.map",
-    "static/js/3.0528e1fd.chunk.js": "/LemurDaniel/DEMO__react-github-pages-test/static/js/3.0528e1fd.chunk.js",
-    "static/js/3.0528e1fd.chunk.js.map": "/LemurDaniel/DEMO__react-github-pages-test/static/js/3.0528e1fd.chunk.js.map",
-    "index.html": "/LemurDaniel/DEMO__react-github-pages-test/index.html",
-    "static/css/main.8ceeeda2.chunk.css.map": "/LemurDaniel/DEMO__react-github-pages-test/static/css/main.8ceeeda2.chunk.css.map",
-    "static/js/2.79dd96a1.chunk.js.LICENSE.txt": "/LemurDaniel/DEMO__react-github-pages-test/static/js/2.79dd96a1.chunk.js.LICENSE.txt"
+    "main.css": "/DEMO__react-github-pages-test/static/css/main.8ceeeda2.chunk.css",
+    "main.js": "/DEMO__react-github-pages-test/static/js/main.a331bd74.chunk.js",
+    "main.js.map": "/DEMO__react-github-pages-test/static/js/main.a331bd74.chunk.js.map",
+    "runtime-main.js": "/DEMO__react-github-pages-test/static/js/runtime-main.f3ef57c0.js",
+    "runtime-main.js.map": "/DEMO__react-github-pages-test/static/js/runtime-main.f3ef57c0.js.map",
+    "static/js/2.79dd96a1.chunk.js": "/DEMO__react-github-pages-test/static/js/2.79dd96a1.chunk.js",
+    "static/js/2.79dd96a1.chunk.js.map": "/DEMO__react-github-pages-test/static/js/2.79dd96a1.chunk.js.map",
+    "static/js/3.0528e1fd.chunk.js": "/DEMO__react-github-pages-test/static/js/3.0528e1fd.chunk.js",
+    "static/js/3.0528e1fd.chunk.js.map": "/DEMO__react-github-pages-test/static/js/3.0528e1fd.chunk.js.map",
+    "index.html": "/DEMO__react-github-pages-test/index.html",
+    "static/css/main.8ceeeda2.chunk.css.map": "/DEMO__react-github-pages-test/static/css/main.8ceeeda2.chunk.css.map",
+    "static/js/2.79dd96a1.chunk.js.LICENSE.txt": "/DEMO__react-github-pages-test/static/js/2.79dd96a1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.449a9806.js",
+    "static/js/runtime-main.f3ef57c0.js",
     "static/js/2.79dd96a1.chunk.js",
     "static/css/main.8ceeeda2.chunk.css",
     "static/js/main.a331bd74.chunk.js"
