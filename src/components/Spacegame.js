@@ -158,7 +158,7 @@ const Spacegame = ({ width, height }) => {
 }
 
 Spacegame.defaultProps = {
-    width: window.screen.width,
+    width: window.innerWidth,
     height: window.innerHeight - 35
 }
 
