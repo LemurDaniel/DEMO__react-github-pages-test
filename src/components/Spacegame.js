@@ -11,7 +11,7 @@ const MAX_ASTEROIDS = 30;
 const SCALE = 2;
 const ship = new Ship(0,0,0)
 const asteroids = new ParticleManager();
-const mousePos = { x:0, y:0 }
+const mousePos = new Vector(0, 0)
 
 
 const Spacegame = ({ width, height }) => {
