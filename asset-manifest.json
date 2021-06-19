@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/DEMO__react-github-pages-test/static/css/main.8ceeeda2.chunk.css",
-    "main.js": "/DEMO__react-github-pages-test/static/js/main.44b4d39a.chunk.js",
-    "main.js.map": "/DEMO__react-github-pages-test/static/js/main.44b4d39a.chunk.js.map",
+    "main.css": "/DEMO__react-github-pages-test/static/css/main.3bbe0e77.chunk.css",
+    "main.js": "/DEMO__react-github-pages-test/static/js/main.f0923a90.chunk.js",
+    "main.js.map": "/DEMO__react-github-pages-test/static/js/main.f0923a90.chunk.js.map",
     "runtime-main.js": "/DEMO__react-github-pages-test/static/js/runtime-main.f3ef57c0.js",
     "runtime-main.js.map": "/DEMO__react-github-pages-test/static/js/runtime-main.f3ef57c0.js.map",
     "static/js/2.79dd96a1.chunk.js": "/DEMO__react-github-pages-test/static/js/2.79dd96a1.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.0528e1fd.chunk.js": "/DEMO__react-github-pages-test/static/js/3.0528e1fd.chunk.js",
     "static/js/3.0528e1fd.chunk.js.map": "/DEMO__react-github-pages-test/static/js/3.0528e1fd.chunk.js.map",
     "index.html": "/DEMO__react-github-pages-test/index.html",
-    "static/css/main.8ceeeda2.chunk.css.map": "/DEMO__react-github-pages-test/static/css/main.8ceeeda2.chunk.css.map",
+    "static/css/main.3bbe0e77.chunk.css.map": "/DEMO__react-github-pages-test/static/css/main.3bbe0e77.chunk.css.map",
     "static/js/2.79dd96a1.chunk.js.LICENSE.txt": "/DEMO__react-github-pages-test/static/js/2.79dd96a1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f3ef57c0.js",
     "static/js/2.79dd96a1.chunk.js",
-    "static/css/main.8ceeeda2.chunk.css",
-    "static/js/main.44b4d39a.chunk.js"
+    "static/css/main.3bbe0e77.chunk.css",
+    "static/js/main.f0923a90.chunk.js"
   ]
 }
