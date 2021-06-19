@@ -1,4 +1,5 @@
 {
+  "homepage": "https://github.com/LemurDaniel/DEMO__react-github-pages-test",
   "name": "space_game",
   "version": "0.1.0",
   "private": true,
@@ -15,10 +16,10 @@
   },
   "scripts": {
     "build:CSS": "tailwindcss build -i ./src/css/Globals.css -o ./src/css/Tailwind.css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
