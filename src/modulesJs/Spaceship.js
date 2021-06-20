@@ -64,7 +64,7 @@ class Ship extends Particle {
   thrust(gradual) {
     if(gradual) {
       this.velocity.add(Vector.fromAngle(
-        this.angle, this.cursor.mag() * 0.00055))
+        this.angle, this.cursor.mag() * 0.00105))
     } else {
       this.velocity = Vector.fromAngle(
         this.angle, this.cursor.mag() * 0.035)

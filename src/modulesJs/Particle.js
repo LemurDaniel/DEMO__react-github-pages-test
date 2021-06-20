@@ -21,25 +21,18 @@ class ParticleManager {
         const particles = this.particles;
         const ctx = canvas.getContext('2d');
 
-        let end = particles.length;
-        for (let i = 0; i < end; i++) {
+        let end = particles.length - 1;
+        for (let i = 0; i <= end; i++) {
 
             const prt = particles[i];
-            prt.collisions.length = 0;
+            prt.collisions = {}; // reset collisions for this frame.
 
-            if(prt.alive) {
-                prt.move(canvas);
-                prt.draw(ctx);
-            }
-            else {
-                particles[i] = particles[end - 1];
-                end--;
-                i--;
-            }
+            if(prt.alive) prt.render(canvas);
+            else particles[i--] = particles[end--];
 
         }
 
-        particles.length = end;
+        particles.length = end+1;
 
     }
 
@@ -47,40 +40,39 @@ class ParticleManager {
 
         const particles = this.particles;
 
-        let end = particles.length;
-        for (let i = 0; i < end; i++) {
+        let end = particles.length-1;
+        for (let i = 0; i <= end; i++) {
 
             const prt = particles[i];
 
             if (!prt.alive) continue;
             if (prt === collider) continue;
             
-            // The array get reset after each render.
-            // This is to prevent doubly handling of the same collision in the same frame.
-            if(prt.collisions.includes(collider)) continue;
+            // Prevent double calculating and handling of collisions.
+            if(collider in prt.collisions) continue;
 
             // Calculate distance.
             const dist = prt.dist(collider);
-            if (dist >= prt.radius + collider.radius) continue;
+            if (dist >= prt.radius + collider.radius) {
+                prt.collisions[collider.id] = false;
+                collider.collisions[prt.id] = false;
+                continue;
+            }
+            prt.collisions[collider.id] = true;
+            collider.collisions[prt.id] = true;
+
 
             // On Collision.
             const result = collider.onCollision(prt);
-            collider.collisions.push(prt);
-            prt.collisions.push(collider);
 
             // Remove dead particles.
-            if(!prt.alive) {
-                particles[i] = particles[end-1];
-                particles.length = end-1;
-                end--;
-                i--;
-            }
-
+            if(!prt.alive) particles[i--] = particles[end--];
+    
             if(afterCollision) afterCollision(result, collider, prt);
-
-            if(!collider.alive) return;
+            if(!collider.alive) break;
         }
 
+        particles.length = end+1;
 
     }
 
@@ -89,13 +81,16 @@ class ParticleManager {
 
 export class Particle extends Vector {
 
+    static id = 0;
+
     constructor(pos, velocity, radius) {
         super(pos.x, pos.y);
+        this.id = Particle.id++;
         this.alive = true;
         this.angle = 0;
         this.radius = radius;
         this.velocity = velocity;
-        this.collisions = [];
+        this.collisions = {};
     }
 
     isOOB(canvas) {
@@ -116,6 +111,11 @@ export class Particle extends Vector {
             this.y = -this.radius * 2;
         else if (this.y < -this.radius * 2 - 5)
             this.y = canvas.height + this.radius * 2;
+    }
+
+    render(canvas) {
+        this.move(canvas);
+        this.draw(canvas.getContext('2d'));
     }
 
     move(canvas) {
