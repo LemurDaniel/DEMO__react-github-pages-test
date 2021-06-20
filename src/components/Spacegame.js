@@ -11,7 +11,10 @@ const MAX_ASTEROIDS = 30;
 const SCALE = 2;
 const ship = new Ship(0, 0, 0)
 const asteroids = new ParticleManager();
-const mousePos = new Vector(0, 0)
+const mousePos = {
+    vec: new Vector(0, 0),
+    draw: true,
+}
 
 
 const Spacegame = ({ width, height }) => {
@@ -41,22 +44,25 @@ const Spacegame = ({ width, height }) => {
 
 
     const [gameRunning, setGameRunning] = useState(true);
-    const [cursor, setCursor] = useState(true);
+    const [pause, setPause] = useState(false);
 
     const onMouseMove = e => {
         const canvas = canvasRef.current;
 
-        if (e.type === 'touchmove') {
+        if (e.type === 'touchmove' || e.type === 'touchstart') {
             const touch = e.nativeEvent.touches[0]
-            mousePos.x = (touch.clientX - canvas.offsetLeft) * SCALE;
-            mousePos.y = (touch.clientY - canvas.offsetTop) * SCALE;
-            ship.setCursor(mousePos);
+            mousePos.vec.x = (touch.clientX - canvas.offsetLeft) * SCALE;
+            mousePos.vec.y = (touch.clientY - canvas.offsetTop) * SCALE;
+            ship.setCursor(mousePos.vec);
             ship.thrust(true);
         } else if (e.type === 'mousemove') {
-            mousePos.x = (e.clientX - canvas.offsetLeft) * SCALE;
-            mousePos.y = (e.clientY - canvas.offsetTop) * SCALE;
-            ship.setCursor(mousePos);
+            mousePos.vec.x = (e.clientX - canvas.offsetLeft) * SCALE;
+            mousePos.vec.y = (e.clientY - canvas.offsetTop) * SCALE;
+            ship.setCursor(mousePos.vec);
         }
+
+        if(e.type === 'touchstart') mousePos.draw = true;
+        else if(e.type === 'touchend') mousePos.draw = false;
     }
 
 
@@ -104,9 +110,9 @@ const Spacegame = ({ width, height }) => {
 
             ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-            if (cursor) {
+            if (mousePos.draw) {
                 ctx.beginPath();
-                ctx.arc(mousePos.x, mousePos.y, 5, 0, Math.PI * 2)
+                ctx.arc(mousePos.vec.x, mousePos.vec.y, 5, 0, Math.PI * 2)
                 ctx.fill();
             }
 
@@ -131,11 +137,11 @@ const Spacegame = ({ width, height }) => {
         };
 
         // Draw on frame to make cursor dissapear.
-        if (!cursor) return loop();
+        if (pause) return loop();
 
         const ticker = setInterval(() => loop(), 1000 / 60);
         return () => clearInterval(ticker);
-    }, [cursor, gameRunning]);
+    }, [pause, gameRunning]);
 
 
 
@@ -150,8 +156,9 @@ const Spacegame = ({ width, height }) => {
 
             <div className="rounded-md">
                 <canvas style={{ 'touch-action': 'none' }}
-                    height={height} width={width} onMouseMove={onMouseMove} onTouchMove={onMouseMove} onClick={e => ship.shoot()}
-                    onMouseLeave={e => setCursor(false)} onMouseEnter={e => setCursor(true)}
+                    height={height} width={width} onMouseMove={onMouseMove} onClick={e => ship.shoot()}
+                    onTouchMove={onMouseMove} onTouchEnd={onMouseMove} onTouchStart={onMouseMove}
+                    onMouseLeave={e => setPause(true)} onMouseEnter={e => setPause(false)}
                     ref={canvasRef} className=" " ></canvas>
             </div>
 
