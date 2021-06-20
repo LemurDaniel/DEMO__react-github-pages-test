@@ -49,8 +49,8 @@ class ParticleManager {
             if (prt === collider) continue;
             
             // Prevent double calculating and handling of collisions.
-            if(collider in prt.collisions) continue;
-
+            if(collider.id in prt.collisions) continue;
+            
             // Calculate distance.
             const dist = prt.dist(collider);
             if (dist >= prt.radius + collider.radius) {

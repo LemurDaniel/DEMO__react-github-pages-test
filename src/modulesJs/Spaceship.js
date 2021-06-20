@@ -81,13 +81,6 @@ class Ship extends Particle {
     this.cursor = Vector.sub(pos, this);
   }
 
-  render(canvas) {
-
-    const ctx = canvas.getContext('2d')
-    this.move(canvas);
-    this.draw(ctx);
-
-  }
 
   // draw spaceship
   draw(ctx) {
