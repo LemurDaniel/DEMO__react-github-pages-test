@@ -28,6 +28,7 @@ class Bullet extends Particle {
 
     ast.alive = false
     this.alive = false;
+    this.died = true;
 
     return Math.floor(ast.mass / (Math.random() * 10 + 100));
   }
@@ -101,9 +102,6 @@ class Ship extends Particle {
     const canvas = ctx.canvas;
     ctx.setTransform(1,0,0,1, canvas.width*0.05, canvas.height*0.035)
 
-    //ctx.font = 'bold 44px arial';
-    //ctx.fillText('Lives: ', x, 20);
-
     const size = 0.8;
     ctx.scale(size,size)
     ctx.rotate(-Math.PI/4)
@@ -147,7 +145,7 @@ class Ship extends Particle {
   }
 
   onCollision(ast) {
-    console.log('ass')
+    // console.log('ababsasbdsd')
     ast.alive = false;
     this.alive--;
 

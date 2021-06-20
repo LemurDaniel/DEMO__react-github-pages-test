@@ -17,27 +17,35 @@ const mousePos = {
 }
 
 
-const Spacegame = ({ width, height }) => {
+const Spacegame = () => {
 
     const canvasRef = useRef(null);
+    const [dimension, setDimension] = useState([window.innerWidth, window.innerHeight-70])
+    useEffect(() => {
+        const setSize = () => {
+            const newWidth = window.innerWidth;
+            const newHeight = window.innerHeight-70;
+            setDimension([newWidth, newHeight])
+        }
+        window.onresize = setSize;
+        return () => window.onresize = null;
+    }, [])
     useEffect(() => {
         const canvas = canvasRef.current;
+        const width = dimension[0]
+        const height = dimension[1]
+
+        if(ship.x == 0 && ship.y == 0) { 
+            ship.x = width * SCALE / 2
+            ship.y = height * SCALE / 2
+        } 
 
         canvas.height = height * SCALE;
         canvas.width = width * SCALE;
         canvas.style.width = width + 'px'
         canvas.style.height = height + 'px';
-
-        // Scale and translate origin once.
-        canvas.getContext('2d').scale(SCALE, SCALE);
-        ship.x = width * SCALE / 2
-        ship.y = height * SCALE / 2;
-
-        ship.x = width * SCALE / 2;
-        ship.y = height * SCALE / 2;
-
-        return () => canvas.getContext('2d').scale(-SCALE, -SCALE);
-    }, [canvasRef, width, height]);
+        
+    }, [canvasRef, dimension]);
 
 
 
@@ -54,11 +62,13 @@ const Spacegame = ({ width, height }) => {
             mousePos.vec.x = (touch.clientX - canvas.offsetLeft) * SCALE;
             mousePos.vec.y = (touch.clientY - canvas.offsetTop) * SCALE;
             ship.setCursor(mousePos.vec);
+            if(pause) setPause(false);
             ship.thrust(true);
         } else if (e.type === 'mousemove') {
-            mousePos.vec.x = (e.clientX - canvas.offsetLeft) * SCALE;
+            mousePos.vec.x = (e.clientX - canvas.offsetLeft) * SCALE ;
             mousePos.vec.y = (e.clientY - canvas.offsetTop) * SCALE;
             ship.setCursor(mousePos.vec);
+            if(pause) setPause(false);
         }
 
         if(e.type === 'touchstart') mousePos.draw = true;
@@ -95,7 +105,6 @@ const Spacegame = ({ width, height }) => {
             const canvas = canvasRef.current;
             const ctx = canvas.getContext('2d');
 
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
             ctx.strokeStyle = 'white';
@@ -108,9 +117,7 @@ const Spacegame = ({ width, height }) => {
             cannon.render(canvas)
             ship.render(canvas)
 
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-            if (mousePos.draw) {
+            if (mousePos.draw && !pause) {
                 ctx.beginPath();
                 ctx.arc(mousePos.vec.x, mousePos.vec.y, 5, 0, Math.PI * 2)
                 ctx.fill();
@@ -147,7 +154,7 @@ const Spacegame = ({ width, height }) => {
 
 
     return (
-        <div className="overflow-hidden" >
+        <div className="overflow-hidden select-none" >
 
             <div className="relative flex justify-evenly font-bold text-brand2-100" >
                 <p className="absolute md:left-1/3 top-2">Highscore: {score}</p>
@@ -156,10 +163,10 @@ const Spacegame = ({ width, height }) => {
 
             <div className="rounded-md">
                 <canvas style={{ 'touch-action': 'none' }}
-                    height={height} width={width} onMouseMove={onMouseMove} onClick={e => ship.shoot()}
+                    height={dimension[1]} width={dimension[0]} onMouseMove={onMouseMove} onClick={e => ship.shoot()}
                     onTouchMove={onMouseMove} onTouchEnd={onMouseMove} onTouchStart={onMouseMove}
                     onMouseLeave={e => setPause(true)} onMouseEnter={e => setPause(false)}
-                    ref={canvasRef} className=" " ></canvas>
+                    ref={canvasRef} className="" ></canvas>
             </div>
 
         </div>
