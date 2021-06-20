@@ -62,23 +62,24 @@ const Spacegame = ({ width, height }) => {
 
 
     const [astAmount, setAstAmount] = useState(0);
-    const [astTarget, setAstTarget] = useState(12);
-    useEffect(() => {
-        const add = () => {
-            if (asteroids.count() >= astTarget) return;
-            asteroids.push(Asteroid.getRandom(canvasRef.current, ship));
-            setAstAmount(asteroids.count());
-        };
-
-        setTimeout(add, Math.random() * 1000 + 75)
-    }, [astAmount, astTarget])
-
-
+    const [astTarget, setAstTarget] = useState(0);
     const [score, setScore] = useState(0);
     useEffect(() => {
-        const amount = Math.max(12, Math.ceil(score / 75))
-        setAstTarget(Math.min(MAX_ASTEROIDS, amount));
+        const amount = Math.max(4, Math.ceil(score / 75))
+        setAstTarget(Math.min(MAX_ASTEROIDS, amount))
     }, [score])
+    useEffect(() => {
+        while (asteroids.count(true) < astTarget) {
+            const ast = Asteroid.getRandom(canvasRef.current, ship);
+            ast.setLimbo(Math.random() * 750 + 150, () => setAstAmount(asteroids.count()));
+            asteroids.push(ast);
+        }
+    }, [astTarget, astAmount]);
+
+
+
+
+
     useEffect(() => {
         if (!ship || !asteroids || !gameRunning) return;
         let localScore = score;
@@ -114,6 +115,7 @@ const Spacegame = ({ width, height }) => {
             asteroids.particles.forEach(prt => {
                 asteroids.calculateCollsision(ship, () => {
                     // setGameRunning(false);
+                    setAstAmount(asteroids.count());
                 })
                 asteroids.calculateCollsision(prt);
             });
