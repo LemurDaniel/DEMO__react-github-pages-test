@@ -19,6 +19,11 @@ class ParticleManager {
         else this.particles.push(prt)
     }
 
+    reset() {
+        this.limbo = [];
+        this.particles = [];
+        this.dying = [];
+    }
 
     _checkLimbo() {
 
@@ -136,7 +141,8 @@ export class Particle extends Vector {
         this.id = Particle.id++;
 
         this.limbo = 0; // Time before Particle is active.
-        this.alive = lives;
+        this.lives = lives;
+        this.alive = true;
         this.died = false;
         this.angle = 0;
         this.radius = radius;

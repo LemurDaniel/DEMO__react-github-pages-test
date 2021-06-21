@@ -51,16 +51,6 @@ class Ship extends Particle {
 
     this.cannon = new ParticleManager();
 
-    document.addEventListener('keyup', e => {
-      if (e.code === 'Space') {
-        this.shoot();
-      }
-      if (e.code === 'KeyW') {
-        this.thrust();
-      }
-    })
-
-
   }
 
   shoot() {
@@ -88,9 +78,9 @@ class Ship extends Particle {
   draw(ctx) {
     this.drawLives(ctx)
 
-    if(!this.faded) {
+    if (!this.faded) {
       this.fade();
-      if(this.hidden) return;
+      if (this.hidden) return;
     }
 
     super.draw(ctx);
@@ -98,17 +88,17 @@ class Ship extends Particle {
   }
 
   drawLives(ctx) {
-    
+
     const canvas = ctx.canvas;
-    ctx.setTransform(1,0,0,1, canvas.width*0.05, canvas.height*0.035)
+    ctx.setTransform(1, 0, 0, 1, canvas.width * 0.05, canvas.height * 0.035)
 
     const size = 0.8;
-    ctx.scale(size,size)
-    ctx.rotate(-Math.PI/4)
+    ctx.scale(size, size)
+    ctx.rotate(-Math.PI / 4)
 
-    for(let i=0; i<this.alive; i++) {
+    for (let i = 0; i < this.lives; i++) {
       this.drawShip(ctx);
-      ctx.translate(60*size, 60*size);
+      ctx.translate(60 * size, 60 * size);
     }
   }
 
@@ -147,12 +137,15 @@ class Ship extends Particle {
   onCollision(ast) {
     // console.log('ababsasbdsd')
     ast.alive = false;
-    this.alive--;
+    if (--this.lives <= 0)
+      this.alive = false;
+    else {
+      this.faded = false;
+      this.hidden = true;
+      this.fadeTime = 12;
+      this.fadeEnd = 12;
+    }
 
-    this.faded = false;
-    this.hidden = true;
-    this.fadeTime = 12;
-    this.fadeEnd = 12;
   }
 
 }
