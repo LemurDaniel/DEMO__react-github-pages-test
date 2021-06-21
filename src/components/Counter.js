@@ -5,7 +5,7 @@ const Counter = ({ticks, setTicks, pause, onTick}) => {
     useEffect(() => {
         if(pause) return;
         const ticker = setTimeout(()=> setTicks(ticks+1), 1000);
-        onTick();
+        onTick(ticks);
     },[ticks, pause])
 
     const sec = ticks % 60;
