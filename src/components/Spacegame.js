@@ -104,10 +104,12 @@ const Spacegame = () => {
 
     const [gameRunning, setGameRunning] = useState(true);
     const [ticks, setTicks] = useState(0);
-    const onTick = tick => {
-        if (tick % (60 * 5) === 0) setScore(score + 125);
-        else if (tick % 60 === 0) setScore(score + 25);
-    }
+    useEffect(() => {
+        if(ticks === 0) return;
+        else if (ticks % (60 * 5) === 0) setScore(score + 125);
+        else if (ticks % 60 === 0) setScore(score + 25);
+        else if (ticks % 30 === 0) setScore(score + 5);
+    },[ticks]);
 
     useEffect(() => {
         if (gameRunning) return;
@@ -200,7 +202,7 @@ const Spacegame = () => {
                 <p className="absolute md:left-1/3 top-2">Highscore: {score}</p>
                 <p className="absolute md:right-1/3 top-8 md:top-2">Asteroids: {astAmount} / {astTarget}</p>
                 <div className="absolute right-4 md:right-12 top-2 md:top-2">
-                    <Counter ticks={ticks} setTicks={setTicks} pause={pause} onTick={onTick} />
+                    <Counter ticks={ticks} setTicks={setTicks} pause={pause} />
                 </div>
             </div>
 

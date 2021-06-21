@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 
-const Counter = ({ticks, setTicks, pause, onTick}) => {
+const Counter = ({ticks, setTicks, pause}) => {
 
     useEffect(() => {
         if(pause) return;
         const ticker = setTimeout(()=> setTicks(ticks+1), 1000);
-        onTick(ticks);
     },[ticks, pause])
 
     const sec = ticks % 60;
