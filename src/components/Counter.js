@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Counter = ({ticks, setTicks, pause}) => {
 
+    const [ticker, setTicker] = useState(null);
     useEffect(() => {
-        if(pause) return;
-        const ticker = setTimeout(()=> setTicks(ticks+1), 1000);
+        // Should prevent a bug from occuring.
+        if(ticker !== null) clearTimeout(ticker);
+        if(!pause) setTicker(setTimeout(() => setTicks(ticks+1), 1000));
     },[ticks, pause])
 
     const sec = ticks % 60;

@@ -10,7 +10,7 @@ import ParticleManager from '../modulesJs/Particle';
 
 
 
-const MAX_ASTEROIDS = 35;
+const MAX_ASTEROIDS = 40;
 const SCALE = 2;
 const ship = new Ship(0, 0, 0)
 const asteroids = new ParticleManager();
@@ -89,7 +89,7 @@ const Spacegame = () => {
     const [scores, setScores] = useState([]);
     const [score, setScore] = useState(0);
     useEffect(() => {
-        const amount = Math.max(8, Math.ceil(score / 750))
+        const amount = Math.max(8, Math.ceil(score / 550))
         setAstTarget(Math.min(MAX_ASTEROIDS, amount))
     }, [score])
     useEffect(() => {
