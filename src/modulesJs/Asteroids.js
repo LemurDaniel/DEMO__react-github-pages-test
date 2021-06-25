@@ -39,10 +39,10 @@ class Asteroid extends Particle {
         const direction = Vector.sub(ship, pos);
         const obfuscateAngle = direction.heading() - (Math.random() * Math.PI/16  - Math.PI/32)
 
-        const velocity = Vector.fromAngle(obfuscateAngle, Math.random()*(canvas.width*0.0035) )
+        const velocity = Vector.fromAngle(obfuscateAngle, Math.random()*Math.max(canvas.width*0.0035, 1.5) )
 
-        const max = Math.min(canvas.width*0.035, 55);
-        const min = canvas.width*0.005;
+        const max = Math.min(canvas.width*0.055, 55);
+        const min = canvas.width*0.015;
         const radius = Math.random()* max + min;
 
         const verts = [];

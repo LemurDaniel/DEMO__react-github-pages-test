@@ -89,13 +89,13 @@ const Spacegame = () => {
     const [scores, setScores] = useState([]);
     const [score, setScore] = useState(0);
     useEffect(() => {
-        const amount = Math.max(8, Math.ceil(score / 550))
-        setAstTarget(Math.min(MAX_ASTEROIDS, amount))
+        const amount = Math.floor(score / Math.pow(2, 13)  * 40);
+        setAstTarget(Math.max(4, amount))
     }, [score])
     useEffect(() => {
         while (asteroids.count(true) < astTarget) {
             const ast = Asteroid.getRandom(canvasRef.current, ship);
-            ast.setLimbo(Math.random() * 750 + 150, () => setAstAmount(asteroids.count()));
+            ast.setLimbo(Math.random() * 350 + 100, () => setAstAmount(asteroids.count()));
             asteroids.push(ast);
         }
     }, [astTarget, astAmount]);
@@ -113,8 +113,8 @@ const Spacegame = () => {
 
     useEffect(() => {
         if (gameRunning) return;
-        scores.push(score);
-        scores.sort((a, b) => b - a)
+        scores.push({ score: score, ticks: ticks });
+        scores.sort((a, b) => b.score - a.score)
         scores.length = 10;
         setScores(scores);
         setTicks(0);
@@ -177,7 +177,7 @@ const Spacegame = () => {
 
             cannon.particles.forEach(bullet => {
                 asteroids.calculateCollsision(bullet, result => {
-                    localScore += result;
+                    localScore += Math.round( result * (1/canvas.width*1000) );
                     setScore(localScore);
                     setAstAmount(asteroids.count());
                 })
