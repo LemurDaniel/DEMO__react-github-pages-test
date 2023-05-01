@@ -7,18 +7,20 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "browserslist": "^4.21.5",
     "matter-js": "^0.18.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
-    "react-scripts": "4.0.3",
+    "react-router-dom": "^6.11.0",
+    "react-scripts": "^5.0.1",
     "roughjs": "^4.4.1",
     "tailwindcss": "^2.1.4",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "build:CSS": "tailwindcss build -i ./src/css/Globals.css -o ./src/css/Tailwind.css",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build:CSS && npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build"
